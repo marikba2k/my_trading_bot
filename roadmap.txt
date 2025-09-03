@@ -1,0 +1,26 @@
+Bybit Client Wrapper (exchange/bybit_client.py)
+Build a clean interface around pybit for connecting to Bybit.
+
+Functions to implement:
+
+ping() and server_time() (check connection).
+
+get_symbols(), get_ticker(), get_klines() (read data).
+
+get_balance(), get_positions() (account info).
+
+place_order(), cancel_order(), get_fills() (trading basics).
+
+Market Data Layer (data/market_data.py)
+
+Convert raw klines into tidy DataFrames.
+
+Add indicators like SMA, EMA, RSI, ATR.
+
+Risk Management (risk/manager.py)
+
+Position sizing from account equity + risk %.
+
+Automatic SL/TP calculation.
+
+Validation of safe orders.

@@ -1,0 +1,2 @@
+ts_utc,symbol,side,qty,price,fee,fee_asset,exec_id,order_id,is_maker
+2025-08-09T15:41:25.866029+00:00,FLOCKUSDT,Buy,6.77,0.17723,0.00677,,2270000001043966029,2013417641104206080,0
