@@ -1,8 +1,8 @@
-from pybit.unified_trading import HTTP
-import os
-from dotenv import load_dotenv
-load_dotenv()
 
+import os, time, hmac, hashlib, requests
+from dotenv import load_dotenv
+from pybit.unified_trading import HTTP
+from pybit.exceptions import InvalidRequestError
 # def checkCredential():
 #     sess = HTTP(testnet=False,
 #             api_key=os.getenv("BYBIT_API_KEY","").strip(),
@@ -16,17 +16,8 @@ load_dotenv()
 #             print(f"{i} : {api_key_info[i]}")
     
     
-def checkBalance():
-    print(os.getenv("BYBIT_API_KEY"))
-    print(os.getenv("BYBIT_API_SECRET"))
-    s = HTTP(api_key=os.getenv("BYBIT_API_KEY"), api_secret=os.getenv("BYBIT_API_SECRET"), testnet=True, demo = True)
-    print(s.get_wallet_balance(accountType="UNIFIED"))
-    
 
-import os, time, hmac, hashlib, requests
-from dotenv import load_dotenv
-from pybit.unified_trading import HTTP
-from pybit.exceptions import InvalidRequestError
+
 
 load_dotenv()
 
@@ -40,6 +31,13 @@ def show_env():
     # reveal whitespace or BOM
     assert API_KEY == API_KEY.strip(), "Whitespace/BOM around BYBIT_API_KEY"
     assert API_SECRET == API_SECRET.strip(), "Whitespace/BOM around BYBIT_API_SECRET"
+    
+def checkBalance():
+    print(os.getenv("BYBIT_API_KEY"))
+    print(os.getenv("BYBIT_API_SECRET"))
+    s = HTTP(api_key=os.getenv("BYBIT_API_KEY"), api_secret=os.getenv("BYBIT_API_SECRET"), testnet=False, demo = False)
+    print(s.get_wallet_balance(accountType="UNIFIED"))
+    
 
 def try_pybit():
     s = HTTP(api_key=API_KEY.strip(), api_secret=API_SECRET.strip(), testnet=True)
@@ -50,7 +48,7 @@ def try_pybit():
         print("PyBit signed call error:", e)
 
 def try_manual():
-    url = "https://api-testnet.bybit.com/v5/user/query-api"
+    url = "https://api.bybit.com/v5/user/query-api"
     ts = str(int(time.time()*1000))
     recv = "5000"
     payload = ""  # GET, no body
@@ -69,7 +67,7 @@ def try_manual():
 def test():
     print(API_KEY)
     print(API_SECRET)
-    session = HTTP(api_key=API_KEY, api_secret=API_SECRET, testnet=True, demo = True)
+    session = HTTP(api_key=API_KEY, api_secret=API_SECRET, testnet=False, demo = False)
     # Ping Bybit with an authenticated call to make sure its working
     try:
         response = session.get_account_info()
@@ -79,8 +77,9 @@ def test():
         print("❌ Failed to authenticate. Please check your API keys.")
         print("Error:", e) 
 
-test()
-checkBalance()
-
+#test() #--- Maneged to get response after I changed testnet = false demo = false
+#try_manual() ---- works after I changed URL to "https://api.bybit.com/v5/user/query-api"
+checkBalance() 
+print("---- pybit test ----")
 
 

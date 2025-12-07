@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "accounts",
-    "trading"
+    "trading",
+    "corsheaders"
 ]
 
 REST_FRAMEWORK = {
@@ -62,9 +63,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     
-
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+# dev-only:
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'tradebot.urls'
 

@@ -14,7 +14,7 @@ class BybitClient:
             api_key=self.cfg.api_key,
             api_secret=self.cfg.api_secret,
             testnet=self.cfg.testnet,
-            demo=True
+            demo=False
         )
         self.log.info("Bybit client initialized (testnet=%s)", self.cfg.testnet)
 
